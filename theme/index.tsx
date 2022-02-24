@@ -20,9 +20,12 @@ const theme = extendTheme({
         display: 'flex',
         flexDirection: 'column',
       },
-      '.body': {
+      body: {
         // todo check how to do this without breaking the site
         // height: '100%', // Push footer to bottom
+        bgImage: "url('/images/urn_aaid_sc_US_cde81ebd-3969-4b64-b781-17f2a742c45f.png')",
+        bgSize: "cover",
+        bgRepeat: "no-repeat",
         overflowY: 'scroll', // Always show scrollbar to avoid flickering
       },
       html: {

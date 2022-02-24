@@ -1,11 +1,11 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
-import { INITIAL_STATE } from "./state";
+import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
+import { INITIAL_COSTS_STATE, INITIAL_QUESTIONS_STATE } from "./state";
 
-const basketSlice = createSlice({
-  name: "basket",
-  initialState: INITIAL_STATE,
+const costsSlice = createSlice({
+  name: "costs",
+  initialState: INITIAL_COSTS_STATE,
   reducers: {
-    add: (state, action) => {
+    select: (state, action) => {
       return state.map((item) => {
         if (item.id !== action.payload.id) {
           return item;
@@ -13,39 +13,41 @@ const basketSlice = createSlice({
 
         return {
           ...item,
-          quantity: item.quantity + 1,
-        };
-      });
-    },
-    remove: (state, action) => {
-      return state.map((item) => {
-        if (item.id !== action.payload.id) {
-          return item;
-        }
-
-        return {
-          ...item,
-          quantity: item.quantity !== 0 ? item.quantity - 1 : 0,
-        };
-      });
-    },
-    clear: (state, action) => {
-      return state.map((item) => {
-        if (item.id !== action.payload.id) {
-          return item;
-        }
-
-        return {
-          ...item,
-          quantity: 0,
+          quantity: item.quantity !== 0 ? 0 : 1,
+          selected: item.selected !== false ? false : true,
         };
       });
     },
   },
 });
 
-const store = configureStore({ reducer: basketSlice.reducer });
+const questionsSlice = createSlice({
+  name: "questions",
+  initialState: INITIAL_QUESTIONS_STATE,
+  reducers: {
+    answer: (state, action) => {
+      return state.map((item) => {
+        if (item.id !== action.payload.id) {
+          return item;
+        }
 
-export const { add, remove, clear } = basketSlice.actions;
+        return {
+          ...item,
+          answer: action.payload.answer,
+        };
+      });
+    },
+  },
+});
 
-export { basketSlice, store };
+
+const store = configureStore({ reducer: costsSlice.reducer });
+
+export const { select } = costsSlice.actions;
+export const { answer } = questionsSlice.actions;
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
+
+export { costsSlice, questionsSlice, store };

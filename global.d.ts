@@ -1,8 +1,13 @@
-export interface ProductItem {
+export interface CostItem {
   id: string
-  title: string
   description: string
-  price: number
-  imageUrl: string
+  estimate: number
   quantity: number
+  selected: boolean
+}
+
+export interface QuestionItem {
+  description: string
+  answer: string
+  id: number
 }

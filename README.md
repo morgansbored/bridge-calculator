@@ -1,6 +1,6 @@
-# Basic Shop
+# Bridge Calculator
 
-A basic shop front using React and Next.js
+Built using React and Next.js
 
 To start, run the commands
 
@@ -9,5 +9,3 @@ To start, run the commands
 **yarn dev**
 
 Open your favorite browser and visit http://localhost:3000
-
-Given I would have liked to make this more responsive to mobile devices...
